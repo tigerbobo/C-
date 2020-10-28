@@ -1,0 +1,33 @@
+// extern "C" __declspec(dllexport) int load(const char *config);
+// extern "C" __declspec(dllexport) int forword(const char *input, const char *output);
+
+namespace test
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        
+        [DllImport(@"ibooster\\ibooster.dll", EntryPoint = "load", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+        extern static int load(StringBuilder config);
+        
+        [DllImport(@"ibooster\\ibooster.dll", EntryPoint = "forword", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+        extern static int forword(StringBuilder input, StringBuilder output);
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            StringBuilder xml = new StringBuilder("ibooster\\ibooster.xml");
+            int result = load(xml);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            StringBuilder input = new StringBuilder("f:\\01.jpg");
+            StringBuilder output = new StringBuilder("f:\\02.jpg");
+
+            int result = forword(input, output);
+        }
+    }
+}
