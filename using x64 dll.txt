@@ -9,19 +9,29 @@ namespace test
     public partial class Form1 : Form
     {
         [DllImport("ibooster\\ibooster.dll", EntryPoint = "load", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int load(string config);
+        public static extern int fun_load(string config);
+
+        [DllImport("ibooster\\ibooster.dll", EntryPoint = "forword", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int fun_forword(string input, string output, int[] rect);
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void load_Click(object sender, EventArgs e)
         {
             int result = 0;
-            String path = "ibooster\\ibooster.xml";
 
-            result = load(path);
+            result = fun_load("ibooster\\ibooster.xml");
+        }
+
+        private void forword_Click(object sender, EventArgs e)
+        {
+            int result = 0;
+            int[] rect = new int[100];
+
+            result = fun_forword("NG1.jpg", "temp.jpg", rect);
         }
     }
 }
