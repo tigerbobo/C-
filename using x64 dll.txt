@@ -1,0 +1,27 @@
+project -> properties -> build -> platform target -> x64
+
+
+using System.Runtime.InteropServices;
+
+
+namespace test
+{
+    public partial class Form1 : Form
+    {
+        [DllImport("ibooster\\ibooster.dll", EntryPoint = "load", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int load(string config);
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int result = 0;
+            String path = "ibooster\\ibooster.xml";
+
+            result = load(path);
+        }
+    }
+}
